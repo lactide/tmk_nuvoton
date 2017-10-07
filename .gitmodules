@@ -1,6 +1,12 @@
 [submodule "ChibiOS"]
 	path = ChibiOS
 	url = https://github.com/ChibiOS/ChibiOS.git
+	branch = stable_17.6.x
 [submodule "tmk_core"]
 	path = tmk_core
 	url = https://github.com/lactide/tmk_core.git
+	branch = nuvoton
+[submodule "ChibiOS-Contrib"]
+	path = ChibiOS-Contrib
+	url = https://github.com/lactide/ChibiOS-Contrib.git
+	branch = nuvoton_nuc122
