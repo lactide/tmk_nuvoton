@@ -1,3 +1,6 @@
 [submodule "ChibiOS"]
 	path = ChibiOS
 	url = https://github.com/ChibiOS/ChibiOS.git
+[submodule "tmk_core"]
+	path = tmk_core
+	url = https://github.com/lactide/tmk_core.git
