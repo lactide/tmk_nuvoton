@@ -1,0 +1,1 @@
+hardfault_regs = 0x20000fe4;
