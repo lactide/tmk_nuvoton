@@ -63,8 +63,6 @@ matrix_row_t matrix_get_row(uint8_t row)
     return matrix[row];
 }
 
-#define SCR                 (*(volatile uint32_t*)0xE000ED10)
-#define SCR_SLEEPDEEP_MASK  0x04
 static uint32_t woke_up_at = 0;
 void hook_usb_suspend_loop(void) {
     /* Remote wakeup */
@@ -79,7 +77,6 @@ void hook_usb_suspend_loop(void) {
           palClearPad(rows[row].port, rows[row].pad);
       IOPORT2->IEN = 0xff; //enable interrupt
       IOPORT2->IMD = 0xff; //level triggered for all column-pins
-      SCR |= SCR_SLEEPDEEP_MASK;
       UNLOCKREG();
       CLK->PWRCON |= CLK_PWRCON_PWR_DOWN_EN_Msk; //similar to WFI
       CLK->PWRCON &= ~CLK_PWRCON_PWR_DOWN_EN_Msk; //after wakeup
@@ -87,7 +84,6 @@ void hook_usb_suspend_loop(void) {
       woke_up_at = timer_read32();
       for (int row = 0; row < MATRIX_ROWS; row++)
           palSetPad(rows[row].port, rows[row].pad);
-      SCR &= SCR_SLEEPDEEP_MASK;
     }
 }
 
