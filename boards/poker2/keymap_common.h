@@ -20,27 +20,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "keymap.h"
 
-#define KMAP_ISO( \
-    K00, K01, K02, K03, K04, K05, K06, K07, K08, K09, K10, K11, K12, K13, \
-    K14, K15, K16, K17, K18, K19, K20, K21, K22, K23, K24, K25, K26, \
-    K27, K28, K29, K30, K31, K32, K33, K34, K35, K36, K37, K38, K39, K40, \
-    K41, K42, K43, K44, K45, K46, K47, K48, K49, K50, K51, K52, K53, \
-    K54, K55, K56,           K57,                K58, K59, K60, K61  \
+/*
+   The Dxx identifiers are taken from the back of PCB from the diodes used
+   by the key.
+
+   PokerII ISO PCBs don't have the key at diode D14 populated.
+   PokerII ANSI PCBs are probably missing the keys at the diodes D68/D69.
+*/
+
+#define KMAP( \
+    D01, D02, D03, D04, D05, D06, D07, D08, D09, D10, D11, D12, D13, D15, \
+    D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D14, \
+    D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D68, D42, \
+    D43, D69, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, \
+    D57, D59, D60,           D61,                D62, D64, D63, D56  \
 ) \
 { \
-    { KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##K59, KC_##K60, KC_NO,    KC_NO    }, \
-    { KC_NO,    KC_##K41, KC_##K53, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
-    { KC_NO,    KC_##K55, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
-    { KC_##K22, KC_##K26, KC_##K35, KC_NO,    KC_##K50, KC_NO,    KC_##K12, KC_##K08 }, \
-    { KC_##K23, KC_NO,    KC_##K36, KC_NO,    KC_##K51, KC_NO,    KC_NO,    KC_##K09 }, \
-    { KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##K54, KC_NO    }, \
-    { KC_##K15, KC_##K14, KC_##K28, KC_##K00, KC_##K20, KC_NO,    KC_##K61, KC_##K01 }, \
-    { KC_##K16, KC_##K27, KC_##K29, KC_##K42, KC_##K44, KC_NO,    KC_NO,    KC_##K02 }, \
-    { KC_##K17, KC_NO,    KC_##K30, KC_NO,    KC_##K45, KC_NO,    KC_NO,    KC_##K03 }, \
-    { KC_##K18, KC_##K19, KC_##K31, KC_##K32, KC_##K46, KC_##K47, KC_##K05, KC_##K04 }, \
-    { KC_##K21, KC_##K43, KC_##K34, KC_##K33, KC_##K49, KC_##K48, KC_##K06, KC_##K07 }, \
-    { KC_NO,    KC_NO,    KC_NO,    KC_##K57, KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
-    { KC_NO,    KC_##K13, KC_NO,    KC_NO,    KC_##K40, KC_NO,    KC_NO,    KC_NO    }, \
-    { KC_NO,    KC_NO,    KC_NO,    KC_##K56, KC_NO,    KC_##K58, KC_NO,    KC_NO    }, \
-    { KC_##K24, KC_##K25, KC_##K37, KC_##K38, KC_##K39, KC_##K52, KC_##K11, KC_##K10 }, \
+    { KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##D64, KC_##D63, KC_NO,    KC_NO    }, \
+    { KC_NO,    KC_##D43, KC_##D54, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
+    { KC_NO,    KC_##D59, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
+    { KC_##D24, KC_##D28, KC_##D38, KC_NO,    KC_##D51, KC_NO,    KC_##D13, KC_##D09 }, \
+    { KC_##D25, KC_NO,    KC_##D39, KC_NO,    KC_##D52, KC_NO,    KC_NO,    KC_##D10 }, \
+    { KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##D57, KC_NO    }, \
+    { KC_##D17, KC_##D16, KC_##D31, KC_##D01, KC_##D22, KC_NO,    KC_##D56, KC_##D02 }, \
+    { KC_##D18, KC_##D30, KC_##D32, KC_##D69, KC_##D45, KC_NO,    KC_NO,    KC_##D03 }, \
+    { KC_##D19, KC_NO,    KC_##D33, KC_NO,    KC_##D46, KC_NO,    KC_NO,    KC_##D04 }, \
+    { KC_##D20, KC_##D21, KC_##D34, KC_##D35, KC_##D47, KC_##D48, KC_##D06, KC_##D05 }, \
+    { KC_##D23, KC_##D44, KC_##D37, KC_##D36, KC_##D50, KC_##D49, KC_##D07, KC_##D08 }, \
+    { KC_NO,    KC_NO,    KC_NO,    KC_##D61, KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
+    { KC_NO,    KC_##D15, KC_##D14, KC_NO,    KC_##D42, KC_NO,    KC_NO,    KC_NO    }, \
+    { KC_NO,    KC_NO,    KC_NO,    KC_##D60, KC_NO,    KC_##D62, KC_NO,    KC_NO    }, \
+    { KC_##D26, KC_##D27, KC_##D40, KC_##D41, KC_##D68, KC_##D53, KC_##D12, KC_##D11 }, \
 },

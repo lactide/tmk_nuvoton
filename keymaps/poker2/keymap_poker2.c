@@ -49,17 +49,17 @@ enum function_id {
 */
 const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] =
-  KMAP_ISO(GRV,  1,    2,    3,    4,    5,    6,    7,    8,    9,    0,    MINS, EQL,  BSPC,
-           TAB,  Q,    W,    E,    R,    T,    Z,    U,    I,    O,    P,    LBRC, RBRC,
-           FN0,  A,    S,    D,    F,    G,    H,    J,    K,    L,    SCLN, QUOT, BSLS, ENT,
-           LSFT, NUBS, Y,    X,    C,    V,    B,    N,    M,    COMM, DOT,  SLSH, RSFT,
-           LCTL, LGUI, LALT,               SPACE,                RALT, RGUI, APP,  RCTL)
+  KMAP(GRV,  1,    2,    3,    4,    5,    6,    7,    8,    9,    0,    MINS, EQL,  BSPC,
+       TAB,  Q,    W,    E,    R,    T,    Z,    U,    I,    O,    P,    LBRC, RBRC, BSLS,
+       FN0,  A,    S,    D,    F,    G,    H,    J,    K,    L,    SCLN, QUOT, BSLS, ENT,
+       LSFT, NUBS, Y,    X,    C,    V,    B,    N,    M,    COMM, DOT,  SLSH, RSFT,
+       LCTL, LGUI, LALT,               SPACE,                RALT, RGUI, APP,  RCTL)
   [1] =
-  KMAP_ISO(BTLD, F1,   F2,   F3,   F4,   F5,   F6,   F7,   F8,   F9,   F10,  F11,  F12,  DEL,
-           FN1,  TRNS, UP,   TRNS, TRNS, MS_U, TRNS, TRNS, INS,  TRNS, PSCR, SLCK, PAUS,
-           TRNS, LEFT, DOWN, RGHT, MS_L, MS_D, MS_R, BTN3, BTN1, BTN2, HOME, PGUP, TRNS, TRNS,
-           TRNS, TRNS, TRNS, TRNS, WH_D, WH_U, TRNS, TRNS, TRNS, TRNS, END,  PGDN, CAPS,
-           TRNS, TRNS, TRNS,                TRNS,                TRNS, TRNS, TRNS, TRNS)
+  KMAP(BTLD, F1,   F2,   F3,   F4,   F5,   F6,   F7,   F8,   F9,   F10,  F11,  F12,  DEL,
+       FN1,  TRNS, UP,   TRNS, TRNS, MS_U, TRNS, TRNS, INS,  TRNS, PSCR, SLCK, PAUS, TRNS,
+       TRNS, LEFT, DOWN, RGHT, MS_L, MS_D, MS_R, BTN3, BTN1, BTN2, HOME, PGUP, TRNS, TRNS,
+       TRNS, TRNS, TRNS, TRNS, WH_D, WH_U, TRNS, TRNS, TRNS, TRNS, END,  PGDN, CAPS,
+       TRNS, TRNS, TRNS,                TRNS,                TRNS, TRNS, TRNS, TRNS)
 };
 
 const action_t fn_actions[] = {
