@@ -42,11 +42,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     { KC_##D24, KC_##D28, KC_##D38, KC_NO,    KC_##D51, KC_NO,    KC_##D13, KC_##D09 }, \
     { KC_##D25, KC_NO,    KC_##D39, KC_NO,    KC_##D52, KC_NO,    KC_NO,    KC_##D10 }, \
     { KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##D57, KC_NO    }, \
-    { KC_##D17, KC_##D16, KC_##D31, KC_##D01, KC_##D22, KC_NO,    KC_##D56, KC_##D02 }, \
+    { KC_##D17, KC_##D16, KC_##D31, KC_##D01, KC_##D44, KC_NO,    KC_##D56, KC_##D02 }, \
     { KC_##D18, KC_##D30, KC_##D32, KC_##D69, KC_##D45, KC_NO,    KC_NO,    KC_##D03 }, \
     { KC_##D19, KC_NO,    KC_##D33, KC_NO,    KC_##D46, KC_NO,    KC_NO,    KC_##D04 }, \
     { KC_##D20, KC_##D21, KC_##D34, KC_##D35, KC_##D47, KC_##D48, KC_##D06, KC_##D05 }, \
-    { KC_##D23, KC_##D44, KC_##D37, KC_##D36, KC_##D50, KC_##D49, KC_##D07, KC_##D08 }, \
+    { KC_##D23, KC_##D22, KC_##D37, KC_##D36, KC_##D50, KC_##D49, KC_##D07, KC_##D08 }, \
     { KC_NO,    KC_NO,    KC_NO,    KC_##D61, KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
     { KC_NO,    KC_##D15, KC_##D14, KC_NO,    KC_##D42, KC_NO,    KC_NO,    KC_NO    }, \
     { KC_NO,    KC_NO,    KC_NO,    KC_##D60, KC_NO,    KC_##D62, KC_NO,    KC_NO    }, \
