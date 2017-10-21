@@ -64,13 +64,14 @@ USE_PROCESS_STACKSIZE = 0x400
 # Build Options
 #   comment out to disable the options.
 #
-#BOOTMAGIC_ENABLE = yes	# Virtual DIP switch configuration
+# Be aware that you can only enable 3 more endpoints with a NUC122
+# (e.g. Mouse+Extrakeys+NKRO)
+#
 MOUSEKEY_ENABLE = yes	# Mouse keys
 #EXTRAKEY_ENABLE = yes	# Audio control and System control
-#CONSOLE_ENABLE = yes	# Console for debug
+CONSOLE_ENABLE = yes	# Console for debug
 #COMMAND_ENABLE = yes    # Commands for debug and configuration
-#SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
-#NKRO_ENABLE = yes	    # USB Nkey Rollover
+NKRO_ENABLE = yes	    # USB Nkey Rollover
 
 include $(TMK_DIR)/tool/chibios/common.mk
 include $(TMK_DIR)/tool/chibios/chibios.mk
