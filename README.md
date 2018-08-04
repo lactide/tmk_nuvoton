@@ -42,7 +42,7 @@ the function which led to the hardfault.
 Prerequisites
 -------------
 - ARM Toolchain
-- srecord
+- srecord 1.64
 - python3
 - pyusb
 
