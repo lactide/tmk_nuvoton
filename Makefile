@@ -5,6 +5,9 @@ PROJECT ?= poker2
 TMK_DIR = tmk_core
 CHIBIOS = ChibiOS
 CHIBIOS_CONTRIB = ChibiOS-Contrib
+CONFDIR   := .
+BUILDDIR  := ./build
+DEPDIR    := ./.dep
 
 # Directory keyboard dependent files exist
 TARGET_DIR = .
@@ -28,21 +31,18 @@ CONFIG_H = config.h
 #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
 # - For PokerII, FAMILY = NUMICRO and MCU_SERIES = NUC122
 MCU_FAMILY = NUMICRO
-MCU_SERIES = NUC122
 
 # Linker script to use
 # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
 #   or <this_dir>/ld/
 # - LDSCRIPT =
-#   - NUC122SC1 for Poker II
-#   - NUC122SD1 for NUC122 devboard
-MCU_LDSCRIPT ?= NUC122SC1
+#   - NUC1xxxC1xx for Poker II
+#   - NUC1xxxD2xx for NUC122 devboard
 
 # Startup code to use
 #  - it should exist in <chibios>/os/common/ports/ARMCMx/compilers/GCC/mk/
 # - STARTUP =
 #   - nuc122 for NUC122SC1/NUC122SD1
-MCU_STARTUP ?= nuc122
 
 # Board: it should exist either in <chibios>/os/hal/boards/
 #  or <this_dir>/boards
@@ -73,6 +73,7 @@ CONSOLE_ENABLE = yes	# Console for debug
 #COMMAND_ENABLE = yes    # Commands for debug and configuration
 NKRO_ENABLE = yes	    # USB Nkey Rollover
 
+include boards/$(PROJECT)/tmk_options.mk
 include $(TMK_DIR)/tool/chibios/common.mk
 include $(TMK_DIR)/tool/chibios/chibios.mk
 LDFLAGS += -Wl,--just-symbols=hardfault.symbols

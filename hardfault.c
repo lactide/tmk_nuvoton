@@ -19,7 +19,7 @@ void HardFault_Handler(void) __attribute__((naked));
 
 void HardFault_Handler(void)
 {
-    asm volatile(
+    __asm__ volatile(
         "movs r0, #4;"
         "mov  r1, lr;"
         "tst  r0, r1;" /* Check EXC_RETURN[2] */

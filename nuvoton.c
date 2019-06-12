@@ -67,7 +67,7 @@ static uint32_t woke_up_at = 0;
 void hook_usb_suspend_loop(void) {
     /* Remote wakeup */
     if((USBD1.status & 2u) && suspend_wakeup_condition()) {
-        send_remote_wakeup(&USBD1);
+        usbWakeupHost(&USBD1);
         /* wait until SUSPEND flag is gone; scan the matrix in the meantime */
         while (USBD->ATTR & USBD_ATTR_SUSPEND_Msk)
             matrix_scan();
@@ -94,4 +94,11 @@ OSAL_IRQ_HANDLER(NUMICRO_PORTAB_IRQ_VECTOR) {
     IOPORT2->ISRC = isrc_val;
     IOPORT2->IEN = 0x0; // disable interrupt
     OSAL_IRQ_EPILOGUE();
+}
+
+void bootloader_jump(void)
+{
+    UNLOCKREG();
+    FMC->ISPCON |= FMC_ISPCON_BS_Msk;
+    NVIC_SystemReset();
 }

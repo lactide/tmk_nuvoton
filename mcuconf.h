@@ -21,7 +21,6 @@
  * HAL driver system settings.
  */
 
-#define NUC122_USB_USE_USB0									TRUE
-#define NUC122_SERIAL_USE_UART0							FALSE
+#define NUMICRO_USB_USE_USB0									TRUE
 
 #endif /* _MCUCONF_H_ */

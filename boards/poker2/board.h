@@ -40,7 +40,7 @@
 /*
  * MCU type
  */
-#define NUC122SC1
+#define NUC122Zxxxx
 
 /* Board oscillators-related settings. */
 

@@ -61,6 +61,7 @@ const PALConfig pal_default_config =
  */
 void __early_init(void)
 {
+  numicro_clock_init();
 }
 
 /**
