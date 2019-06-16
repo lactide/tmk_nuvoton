@@ -38,6 +38,11 @@ const keymap_port_pin rows[MATRIX_ROWS] =
   {.port = IOPORT4, .pad = 8},
 };
 
+const keymap_column_mask cols[MATRIX_COL_PORTS] =
+{
+  {.port = IOPORT2, .mask = 0x00ff},
+};
+
 #if HAL_USE_PAL || defined(__DOXYGEN__)
 /**
  * @brief   PAL setup.

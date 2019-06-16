@@ -33,6 +33,18 @@ static uint8_t      debounce_row[MATRIX_ROWS];
 void matrix_init(void)
 {
   /* pin initialization already done in board.c */
+#if defined(NUMICRO_PORTAB_IRQ_VECTOR)
+    nvicEnableVector(GPAB_IRQn, 1);
+#endif
+#if defined(NUMICRO_PORTCD_IRQ_VECTOR)
+    nvicEnableVector(GPCD_IRQn, 1);
+#endif
+#if defined(NUMICRO_PORTCDE_IRQ_VECTOR)
+    nvicEnableVector(GPCDE_IRQn, 1);
+#endif
+#if defined(NUMICRO_PORTCDF_IRQ_VECTOR)
+    nvicEnableVector(GPCDF_IRQn, 1);
+#endif
 }
 
 uint8_t matrix_scan(void)
@@ -72,11 +84,12 @@ void hook_usb_suspend_loop(void) {
         while (USBD->ATTR & USBD_ATTR_SUSPEND_Msk)
             matrix_scan();
     } else if (timer_elapsed32(woke_up_at) > 1000) {
-      nvicEnableVector(GPAB_IRQn, 1);
       for (int row = 0; row < MATRIX_ROWS; row++)
           palClearPad(rows[row].port, rows[row].pad);
-      IOPORT2->IEN = 0xff; //enable interrupt
-      IOPORT2->IMD = 0xff; //level triggered for all column-pins
+      for (int col = 0; col < MATRIX_COL_PORTS; col++) {
+          cols[col].port->IEN = cols[col].mask; /* enable interrupt */
+          cols[col].port->IMD = cols[col].mask; /* level-triggered */
+      }
       UNLOCKREG();
       CLK->PWRCON |= CLK_PWRCON_PWR_DOWN_EN_Msk; //similar to WFI
       CLK->PWRCON &= ~CLK_PWRCON_PWR_DOWN_EN_Msk; //after wakeup
@@ -87,14 +100,50 @@ void hook_usb_suspend_loop(void) {
     }
 }
 
-OSAL_IRQ_HANDLER(NUMICRO_PORTAB_IRQ_VECTOR) {
+static void _clear_and_disable_port_interrupt(ioportid_t port) {
     uint32_t isrc_val;
+    isrc_val = port->ISRC;
+    port->ISRC = isrc_val; /* clear pending interrupt */
+    port->IEN = 0x0; /* disable interrupt */
+}
+
+#if defined(NUMICRO_PORTAB_IRQ_VECTOR)
+OSAL_IRQ_HANDLER(NUMICRO_PORTAB_IRQ_VECTOR) {
     OSAL_IRQ_PROLOGUE();
-    isrc_val = IOPORT2->ISRC;
-    IOPORT2->ISRC = isrc_val;
-    IOPORT2->IEN = 0x0; // disable interrupt
+    _clear_and_disable_port_interrupt(IOPORT1);
+    _clear_and_disable_port_interrupt(IOPORT2);
     OSAL_IRQ_EPILOGUE();
 }
+#endif
+
+#if defined(NUMICRO_PORTCD_IRQ_VECTOR)
+OSAL_IRQ_HANDLER(NUMICRO_PORTCD_IRQ_VECTOR) {
+    OSAL_IRQ_PROLOGUE();
+    _clear_and_disable_port_interrupt(IOPORT3);
+    _clear_and_disable_port_interrupt(IOPORT4);
+    OSAL_IRQ_EPILOGUE();
+}
+#endif
+
+#if defined(NUMICRO_PORTCDE_IRQ_VECTOR)
+OSAL_IRQ_HANDLER(NUMICRO_PORTCDE_IRQ_VECTOR) {
+    OSAL_IRQ_PROLOGUE();
+    _clear_and_disable_port_interrupt(IOPORT3);
+    _clear_and_disable_port_interrupt(IOPORT4);
+    _clear_and_disable_port_interrupt(IOPORT5);
+    OSAL_IRQ_EPILOGUE();
+}
+#endif
+
+#if defined(NUMICRO_PORTCDF_IRQ_VECTOR)
+OSAL_IRQ_HANDLER(NUMICRO_PORTCDF_IRQ_VECTOR) {
+    OSAL_IRQ_PROLOGUE();
+    _clear_and_disable_port_interrupt(IOPORT3);
+    _clear_and_disable_port_interrupt(IOPORT4);
+    _clear_and_disable_port_interrupt(IOPORT6);
+    OSAL_IRQ_EPILOGUE();
+}
+#endif
 
 void bootloader_jump(void)
 {

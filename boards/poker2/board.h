@@ -36,6 +36,7 @@
 /* key matrix size */
 #define MATRIX_ROWS 15
 #define MATRIX_COLS 8
+#define MATRIX_COL_PORTS 1
 
 /*
  * MCU type
