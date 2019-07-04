@@ -83,17 +83,16 @@ void hook_usb_suspend_loop(void) {
         /* wait until SUSPEND flag is gone; scan the matrix in the meantime */
         while (USBD->ATTR & USBD_ATTR_SUSPEND_Msk)
             matrix_scan();
-    } else if (timer_elapsed32(woke_up_at) > 1000) {
+    } else if (timer_elapsed32(woke_up_at) > (DEBOUNCE * 2)) {
       for (int row = 0; row < MATRIX_ROWS; row++)
           palClearPad(rows[row].port, rows[row].pad);
-      for (int col = 0; col < MATRIX_COL_PORTS; col++) {
+      for (int col = 0; col < MATRIX_COL_PORTS; col++)
           cols[col].port->IEN = cols[col].mask; /* enable interrupt */
-          cols[col].port->IMD = cols[col].mask; /* level-triggered */
-      }
+      SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
       UNLOCKREG();
       CLK->PWRCON |= CLK_PWRCON_PWR_DOWN_EN_Msk; //similar to WFI
-      CLK->PWRCON &= ~CLK_PWRCON_PWR_DOWN_EN_Msk; //after wakeup
       LOCKREG();
+      SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
       woke_up_at = timer_read32();
       for (int row = 0; row < MATRIX_ROWS; row++)
           palSetPad(rows[row].port, rows[row].pad);
